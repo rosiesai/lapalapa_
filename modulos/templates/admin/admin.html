@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block barra_sup %}
+{% endblock %}
+{% block cuerpo %}
+
+<style>
+.fc-day-header {
+  background-color: #ccc;
+  color: #333;
+}
+.fc-event {
+  background-color: #1e88e5;
+  color: #fff;
+}
+
+.excel-button {
+
+
+    bottom: 40px;
+    left: 40px;
+    z-index: 9999;
+}
+
+/* Estilos para el label */
+  label {
+    display: inline-block;
+    margin-right: 10px; /* Espacio entre el label y el input */
+    font-weight: bold;
+  }
+
+  /* Estilos para el input */
+  input[type="search"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 16px;
+    width: 200px;
+  }
+
+  /* Estilos para el input cuando está enfocado */
+  input[type="search"]:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 5px #66afe9;
+  }
+
+</style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.0.2/js/tableexport.min.js"></script>
+
+    <h1>
+        Administradores
+        <a href="{{ url_for('admin.admin_alta') }}">
+        <img width="50" height="50" src="https://img.icons8.com/cotton/64/plus--v1.png"/>
+  </a>
+</button>
+  </a>
+</button>
+
+    </h1>
+
+    <label for="busqueda">Buscar:</label>
+    <input type="search" id="busqueda" name="busqueda" onkeyup="buscarTabla()">
+
+    <div class="w3-responsive">
+    <table class="w3-table-all w3-hoverable" id="miTabla">
+        <thead>
+          <tr class="w3-light-blue">
+              <th class="w3-center">Eliminar</th>
+              <th class="w3-center">Editar</th>
+              <th>Username</th>
+              <th>Password</th>
+
+          </tr>
+        </thead>
+        {% for e in cdx.admin %}
+        <tr>
+            <td class="w3-center"><a href="{{ url_for('admin.borrar',id=e.id) }}">
+                <img width="50" height="50"  src="https://img.icons8.com/clouds/50/trash.png"/></a></td>
+            <td class="w3-center"><a href="{{ url_for('admin.editar',id=e.id) }}">
+                <img width="50" height="50"  src="https://img.icons8.com/clouds/100/edit.png"/></a></td>
+            <td>{{ e.username }}</td>
+            <td>{{ e.password }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+
+    </div>
+
+    </div>
+    <h1> </h1>
+    <h2> </h2>
+
+    <a onclick="exportTableToExcel('miTabla')" class="excel-button">
+        <img width="60" height="60" src="https://images.freeimages.com/fic/images/icons/2795/office_2013_hd/2000/excel.png"/>
+    </a>
+
+
+
+
+
+<script>
+function exportTableToExcel(tableId) {
+  var exportData = [];
+  var rows = document.getElementById(tableId).querySelectorAll("tbody tr");
+
+  // Obtener los índices de las columnas seleccionadas
+  var headerRow = document.getElementById(tableId).querySelector("thead tr");
+  var selectedColumns = ["Username", "Password"]; // Columnas seleccionadas
+  var columnIndexes = [];
+  for (var i = 0; i < headerRow.children.length; i++) {
+    var columnHeader = headerRow.children[i].innerText;
+    if (selectedColumns.includes(columnHeader)) {
+      columnIndexes.push(i);
+    }
+  }
+
+  // Obtener los títulos de columna correspondientes a las columnas seleccionadas
+  var headers = columnIndexes.map(function(index) {
+    return headerRow.children[index].innerText;
+  });
+  exportData.push(headers.join("\t"));
+
+  // Iterar a través de las filas de la tabla y extraer los datos de las columnas seleccionadas
+  for (var i = 0; i < rows.length; i++) {
+    var rowData = [];
+    var cols = rows[i].querySelectorAll("td");
+
+    // Iterar a través de las celdas de la fila y agregar las correspondientes a las columnas seleccionadas
+    for (var j = 0; j < cols.length; j++) {
+      if (columnIndexes.includes(j)) {
+        // Agregar estilos CSS a las celdas
+        cols[j].style.border = "1px solid #ccc";
+        cols[j].style.padding = "5px";
+        rowData.push(cols[j].innerText);
+      }
+    }
+    exportData.push(rowData.join("\t"));
+  }
+
+  // Crear un elemento temporal 'a' para descargar el archivo Excel
+  var downloadLink = document.createElement("a");
+  var blob = new Blob([exportData.join("\n")], { type: "application/vnd.ms-excel" });
+
+  // Configurar las propiedades del enlace de descarga
+  downloadLink.href = URL.createObjectURL(blob);
+  downloadLink.download = "Administradores.xls";
+  downloadLink.click();
+}
+
+</script>
+
+<script>
+function buscarTabla() {
+  // Obtener el valor del campo de búsqueda
+  var input = document.getElementById("busqueda");
+  var filtro = input.value.toUpperCase();
+
+  // Obtener la tabla y las filas de la tabla
+  var tabla = document.getElementById("miTabla");
+  var filas = tabla.getElementsByTagName("tr");
+
+  // Recorrer las filas y ocultar las que no coincidan con el filtro
+  for (var i = 1; i < filas.length; i++) { // Comenzar en 1 en lugar de 0
+    var celdas = filas[i].getElementsByTagName("td");
+    var mostrarFila = false;
+    for (var j = 0; j < celdas.length; j++) {
+      var textoCelda = celdas[j].textContent || celdas[j].innerText;
+      if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
+        mostrarFila = true;
+        break;
+      }
+    }
+    filas[i].style.display = mostrarFila ? "" : "none";
+  }
+}
+
+</script>
+
+{% endblock %}

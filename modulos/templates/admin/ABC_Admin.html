@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<!-- jQuery UI CSS -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!-- jQuery y jQuery UI -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+
+
+
+<style>
+
+
+</style>
+<form class="w3-container w3-card-4 {% if cdx.tipo == 'alta' %}w3-light-grey{% elif cdx.tipo ==
+    'borrar' %}w3-pale-red {% else %}w3-gray{% endif %}" method="post">
+<h></h>
+<h1></h1>
+<h2>Registrar administrador</h2>
+<br>
+<div class="w3-row-padding">
+
+  <div class="w3-third">
+      <label class="w3-text-black" for="Username"><b>Username:</b></label>
+    <input required name="Username" id="Username" class="w3-input w3-border" type="text" placeholder="Username"
+           {% if cdx.tipo != 'alta' %}value="{{ cdx.admin.username }}"{% endif %}>
+  </div>
+  <div class="w3-third">
+      <label class="w3-text-black" for="Password"><b>Password:</b></label>
+    <input required name="Password" id="Password" class="w3-input w3-border" type="text" placeholder="Password"
+    {% if cdx.tipo != 'alta' %}value="{{ cdx.admin.password }}"{% endif %}>
+  </div>
+
+
+<button type="submit" class="w3-button w3-red w3-section w3-padding w3-right">{% if cdx.tipo == 'alta' %}Crear{% elif cdx.tipo ==
+    'borrar' %}Borrar {% else %}Guardar{% endif %}</button>
+</div>
+
+<h></h>
+<h1></h1>
+<h2></h2>
+
+</form>
+
+<script>
+
+</script>
+
+{% endblock %}

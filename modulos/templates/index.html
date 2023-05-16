@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>La Palapa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&effect=shadow-multiple">
+<style>
+h1, h2, h3, h4, h5, h6 {
+    font-family: Sofia, serif;
+
+}
+.w3-lobster {
+  font-family: "Lobster", Sans-serif;
+}
+.calendario {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.mes {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #008000;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 10px;
+}
+
+th {
+  background-color: #008000;
+  color: white;
+}
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* style the container */
+.container {
+  position: relative;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px 0 30px 0;
+}
+
+/* style inputs and link buttons */
+input,
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+
+input:hover,
+.btn:hover {
+  opacity: 1;
+}
+
+/* add appropriate colors to fb, twitter and google buttons */
+.fb {
+  background-color: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background-color: #55ACEE;
+  color: white;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+}
+
+/* style the submit button */
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Two-column layout */
+.col {
+  float: left;
+  width: 50%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* vertical line */
+.vl {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border: 2px solid #ddd;
+  height: 175px;
+}
+
+/* text inside the vertical line */
+.vl-innertext {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 8px 10px;
+}
+
+/* hide some text on medium and large screens */
+.hide-md-lg {
+  display: none;
+}
+
+/* bottom container */
+.bottom-container {
+  text-align: center;
+  background-color: #666;
+  border-radius: 0px 0px 4px 4px;
+}
+
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px) {
+  .col {
+    width: 100%;
+    margin-top: 0;
+  }
+  /* hide the vertical line */
+  .vl {
+    display: none;
+  }
+  /* show the hidden text on small screens */
+  .hide-md-lg {
+    display: block;
+    text-align: center;
+  }
+}
+
+.float{
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom:40px;
+    right:40px;
+    background-color:#25d366;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+  font-size:30px;
+    box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
+.float:hover {
+    text-decoration: none;
+    color: #25d366;
+  background-color:#fff;
+}
+
+.my-float{
+    margin-top:16px;
+}
+
+</style>
+</head>
+<body id="myPage">
+
+<!-- Navbar -->
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align">
+  <a  class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><img width="25" height="25" src="https://img.icons8.com/sf-black-filled/64/exterior.png" alt="exterior"/></i>Inicio</a>
+  <a href="#AcercaDe" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Acerca de</a>
+  <a href="#Servicios" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Servicios</a>
+  <a href="#Contactanos" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contáctanos</a>
+    {% if session.username %}
+<div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button" title="Notifications">Herramientas <i class="fa fa-caret-down"></i></button>
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block">
+      <a href="/empleados/alta" class="w3-bar-item w3-button">Registrar fecha</a>
+      <a href="/empleados" class="w3-bar-item w3-button">Registros Clientes</a>
+        <a href="/admin" class="w3-bar-item w3-button">Administradores</a>
+        <a href="/admin/alta" class="w3-bar-item w3-button">Registrar Administrador</a>
+    </div>
+</div>
+{% else %}
+
+{% endif %}
+    <!--<div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button" title="Notifications">Herramientas <i class="fa fa-caret-down"></i></button>
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block">
+      <a href="/empleados/alta" class="w3-bar-item w3-button">Calendario</a>
+      <a href="/empleados" class="w3-bar-item w3-button">Registros</a>
+    </div>
+    </div> -->
+
+     {% if session.get('username') %}
+        <a href="/admin/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-white">Cerrar Sesión</a>
+    {% else %}
+        <a href="/admin/admin_login" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-white">Iniciar Sesión</a>
+    {% endif %}
+
+    <!---<a href="/empleados/login" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-white">Iniciar Sesión</a> -->
+ </div>
+
+ </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
+    <a href="#Inicio" class="w3-bar-item w3-button">Inicio</a>
+    <a href="#AcercaDe" class="w3-bar-item w3-button">Acerca de</a>
+    <a href="#servicios" class="w3-bar-item w3-button">Servicios</a>
+    <a href="#Contactanos" class="w3-bar-item w3-button">Contáctanos</a>
+  </div>
+</div>
+
+
+<!-- Botón dinámico dinamita aviso banner :D
+<div class="w3-display-container w3-animate-opacity">
+  <img src="/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+  <div class="w3-container w3-display-bottomleft w3-margin-bottom">
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS">LEARN W3.CSS</button>
+  </div>
+</div>
+
+Modal AVISO
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-top">
+    <header class="w3-container w3-teal w3-display-container">
+      <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+      <h4>Oh snap! We just showed you a modal..</h4>
+      <h5>Because we can <i class="fa fa-smile-o"></i></h5>
+    </header>
+    <div class="w3-container">
+      <p>Cool huh? Ok, enough teasing around..</p>
+      <p>Go to our <a class="w3-text-teal" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
+    </div>
+    <footer class="w3-container w3-teal">
+      <p>Modal footer</p>
+    </footer>
+  </div>
+</div>
+-->
+
+<!-- Inicio -->
+<div class="w3-container w3-padding-64 w3-center " id="Inicio">
+ <div class="w3-container w3-lobster w3-round-xxlarge w3-light-blue">
+    <p class="w3-xxlarge font-effect-shadow-multiple ">La Palapa</p>
+ </div>
+<h1>Nunca te das cuenta de la falta que te hace un día de piscina en familia.</h1>
+<h2>Conoce nuestros servicios e instalaciones </h2>
+
+<div>
+  <img src="https://i.ibb.co/Nj7L6XQ/1.jpg" alt="0" border="0">
+</div>
+</div>
+<!-- Work Row -->
+<div class="w3-row-padding w3-padding-64 w3-theme-l1" id="AcercaDe">
+<div class="w3-center">
+<h2>Acerca de nosotros</h2>
+<p> Principalmente esta alberca junto con dicho espacio debajo de una palapa fue elaborado especialmente para los hijos del dueño con el objetivo de darles un lugar para pasar las tardes.
+    Se renta casi diariamente en cada verano desde aproximadamente el año 2013.</p>
+    <p>Además se le brinda a las personas en un punto céntrico, un sitio para pasar el rato en familia y disfrutar del día y del calorcito.</p>
+</div>
+<!-- <div class="w3-quarter">
+<div class="w3-card w3-white">
+  <img src="/w3images/snow.jpg" alt="Snow" style="width:100%">
+  <div class="w3-container">
+  <h3>Customer 1</h3>
+  <h4>Trade</h4>
+  <p>Blablabla</p>
+  <p>Blablabla</p>
+  <p>Blablabla</p>
+  <p>Blablabla</p>
+  </div>
+  </div>
+</div>
+-->
+
+</div>
+<!-- Ubicacion Container -->
+
+<div class="w3-row-padding w3-center w3-padding-64" id="Ubicacion">
+
+    <div class="w3-container">
+    <h2 class="w3-xxlarge font-effect-shadow-multiple w3-round-xxlarge w3-light-blue">Ubicación </h2>
+    <p>¡Conoce exactamente dónde nos ubicamos!</p><br>
+
+
+        <section class="mapa">
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3536.2940802966154!2d-109.93037342534706!3d27.58441083090441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86c86ab8eead848d%3A0x8c724afcea4ae827!2s%C3%81lvaro%20Obreg%C3%B3n%20306%2C%20Esperanza%2C%2085210%20Esperanza%2C%20Son.!5e0!3m2!1ses-419!2smx!4v1684213582633!5m2!1ses-419!2smx" width="1000" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        </section>
+
+
+    </div>
+
+</div>
+<!-- Pricing Row -->
+<div class="w3-row-padding w3-center w3-padding-64" id="Servicios">
+
+    <div class="w3-container">
+    <h2 class="w3-xxlarge font-effect-shadow-multiple w3-round-xxlarge w3-light-blue">Servicios</h2>
+    <p>Lee acerca de nuestros servicios!</p><br>
+    <div class="w3-third w3-margin-bottom">
+      <ul class="w3-ul w3-border w3-hover-shadow">
+        <li class="w3-theme">
+          <p class="w3-xlarge">15 personas</p>
+        </li>
+        <li class="w3-padding-16"><b>Baños</b>  para hombre y mujer</li>
+        <li class="w3-padding-16"><b>Asadero</b></li>
+        <li class="w3-padding-16"><b>Refrigerador</b></li>
+        <li class="w3-padding-16"><b>Regadera</b></li>
+        <li class="w3-padding-16"><b>Hielera</b></li>
+        <li class="w3-padding-16"><b>Chapoteadero</b> para los peques!</li>
+        <li class="w3-padding-16"><b>Sillas y mesas</b></li>
+        <li class="w3-padding-16">
+          <h2 class="w3-wide"><i class="fa fa-usd"></i> 1300 </h2>
+          <span class="w3-opacity"> por 5 horas </span>
+        </li>
+        <li class="w3-theme-l5 w3-padding-24">
+            {% if session.get('username') %}
+          <a href="/empleados/alta"><button class="w3-button w3-light-blue w3-padding-large"><i class="fa fa-check">  </i> Aparta tu fecha!</button></a>
+            {% else %}
+          <a href="#Contactanos"><button class="w3-button w3-light-blue w3-padding-large"><i class="fa fa-check">  </i> Aparta tu fecha!</button></a>
+            {% endif %}
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="w3-third w3-margin-bottom">
+      <ul class="w3-ul w3-border w3-hover-shadow">
+        <li class="w3-theme">
+          <p class="w3-xlarge">10 personas</p>
+        </li>
+        <li class="w3-padding-16"><b>Baños</b>  para hombre y mujer</li>
+        <li class="w3-padding-16"><b>Asadero</b></li>
+        <li class="w3-padding-16"><b>Refrigerador</b></li>
+        <li class="w3-padding-16"><b>Regadera</b></li>
+        <li class="w3-padding-16"><b>Hielera</b></li>
+        <li class="w3-padding-16"><b>Chapoteadero</b> para los peques!</li>
+        <li class="w3-padding-16"><b>Sillas y mesas</b></li>
+        <li class="w3-padding-16">
+          <h2 class="w3-wide"><i class="fa fa-usd"></i> 1000 </h2>
+          <span class="w3-opacity"> por 5 horas </span>
+        <li class="w3-theme-l5 w3-padding-24">
+        {% if session.get('username') %}
+          <a href="/empleados/alta"><button class="w3-button w3-light-blue w3-padding-large"><i class="fa fa-check">  </i> Aparta tu fecha!</button></a>
+            {% else %}
+          <a href="#Contactanos"><button class="w3-button w3-light-blue w3-padding-large"><i class="fa fa-check">  </i> Aparta tu fecha!</button></a>
+            {% endif %}
+        </li>
+      </ul>
+    </div>
+
+    <div class="w3-third w3-margin-bottom">
+      <ul class="w3-ul w3-border w3-hover-shadow">
+        <li class="w3-theme">
+          <p class="w3-xlarge">25 personas</p>
+        </li>
+        <li class="w3-padding-16"><b>Baños</b>  para hombre y mujer</li>
+        <li class="w3-padding-16"><b>Asadero</b></li>
+        <li class="w3-padding-16"><b>Refrigerador</b></li>
+        <li class="w3-padding-16"><b>Regadera</b></li>
+        <li class="w3-padding-16"><b>Hielera</b></li>
+        <li class="w3-padding-16"><b>Chapoteadero</b> para los peques!</li>
+        <li class="w3-padding-16"><b>Sillas y mesas</b></li>
+        <li class="w3-padding-16">
+          <h2 class="w3-wide"><i class="fa fa-usd"></i> 1150 </h2>
+          <span class="w3-opacity"> por 5 horas </span>
+        </li>
+        <li class="w3-theme-l5 w3-padding-24">
+         {% if session.get('username') %}
+          <a href="/empleados/alta"><button class="w3-button w3-light-blue w3-padding-large"><i class="fa fa-check">  </i> Aparta tu fecha!</button></a>
+            {% else %}
+          <a href="#Contactanos"><button class="w3-button w3-light-blue w3-padding-large"><i class="fa fa-check">  </i> Aparta tu fecha!</button></a>
+            {% endif %}
+        </li>
+      </ul>
+    </div>
+    </div>
+    <!-- Inserta foto :D -->
+</div>
+<!-- Contactos Container -->
+<div class="w3-container w3-padding-64 w3-theme-l5 " id="Contactanos">
+  <div class="w3-row">
+    <div class="w3-col m5">
+    <div class="w3-padding-16"><span class="w3-xlarge w3-border-blue w3-bottombar ">Contactános</span></div>
+      <h3>Dirección</h3>
+      <p>¡Ven a disfrutar de una buena Palapa!</p>
+      <p><i class="fa fa-map-marker w3-text-blue  w3-xlarge "></i>  Calle Alvaro Obregon #302 entre Sinaloa y Baja California, Esperanza</p>
+      <p><a href="https://wa.me/6441269901"><i class="fa fa-phone w3-text-blue w3-xlarge"></i> 6441269901</a></p>
+      <p><i class="fa fa-envelope-o w3-text-blue  w3-xlarge"></i>  LaPalapa@gmail.com</p>
+    </div>
+  </div>
+</div>
+<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
+  <!--<h4>Síguenos!</h4> -->
+
+  <div style="position:fixed;bottom:100px;z-index:1;" class="w3-tooltip" >
+    <span class="w3-text w3-padding w3-light-blue w3-hide-small w3-right">Subir</span>
+    <a class="w3-button w3-theme" href="#myPage"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css%22%3E">
+    <a href="https://wa.me/6441269901" class="float" target="_blank">
+    <i class="fa fa-whatsapp my-float"></i>
+    </a>
+</footer>
+
+<script>
+// Script for side navigation
+function w3_open() {
+  var x = document.getElementById("mySidebar");
+  x.style.width = "300px";
+  x.style.paddingTop = "10%";
+  x.style.display = "block";
+}
+
+// Close side navigation
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html>
